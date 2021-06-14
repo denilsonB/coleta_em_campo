@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  #before_action :set_user, only: [:show, :update, :destroy]
   wrap_parameters :user, include: [:name, :password, :password_confirmation, :email, :cpf]
 
   # GET /users
@@ -11,6 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @user = User.find_by(id:params[:id])
     render json: @user
   end
 
@@ -27,6 +27,8 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    @user = User.find_by(id:params[:id])
+
     if @user.update(user_params)
       render json: @user
     else
@@ -36,6 +38,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    @user = User.find_by(id:params[:id])
     @user.destroy
   end
 

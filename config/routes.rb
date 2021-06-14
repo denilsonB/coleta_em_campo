@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :users
-  post 'authenticate', to: 'authentication#authenticate'
   
+  post 'authenticate', to: 'authentication#authenticate'#authenticate user
+  
+  
+  
+  #resources
+  resources :visits
+  resources :users
 end

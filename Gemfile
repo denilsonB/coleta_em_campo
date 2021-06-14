@@ -10,6 +10,8 @@ gem 'jwt'
 gem 'simple_command'
 gem 'rack-cors'
 gem 'active_model_serializers'
+gem 'validates_cpf'
+gem 'email_validator'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
