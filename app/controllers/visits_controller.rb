@@ -8,6 +8,7 @@ class VisitsController < ApplicationController
 
   # GET /visits/1
   def show
+    @visit = Visit.find_by(id:params[:id])
     render json: @visit
   end
 
@@ -24,6 +25,8 @@ class VisitsController < ApplicationController
 
   # PATCH/PUT /visits/1
   def update
+    @visit = Visit.find_by(id:params[:id])
+
     if @visit.update(visit_params)
       render json: @visit
     else
@@ -33,6 +36,7 @@ class VisitsController < ApplicationController
 
   # DELETE /visits/1
   def destroy
+    @visit = Visit.find_by(id:params[:id])
     @visit.destroy
   end
 

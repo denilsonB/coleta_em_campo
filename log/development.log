@@ -2717,3 +2717,239 @@ Completed 401 Unauthorized in 48ms (Views: 18.5ms | ActiveRecord: 0.0ms | Alloca
   [1m[36mVisit Create (3.2ms)[0m  [1m[32mINSERT INTO "visits" ("date", "user_id", "checkin_at", "checkout_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["date", "2021-06-15"], ["user_id", 6], ["checkin_at", "2021-06-13 14:00:00"], ["checkout_at", "2021-06-13 16:00:00"], ["created_at", "2021-06-14 00:00:00"], ["updated_at", "2021-06-15 01:18:59.095550"]]
   [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
   [1m[36mVisit Load (2.9ms)[0m  [1m[34mSELECT "visits".* FROM "visits" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/authenticate" for ::1 at 2021-06-14 22:29:45 -0300
+  [1m[35m (4.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/authenticate"):
+  
+Started POST "/authenticate" for ::1 at 2021-06-14 22:30:07 -0300
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"valido@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"valido@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valido@gmail.com"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:18:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valido@gmail.com"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:18:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.15ms)
+Completed 200 OK in 1219ms (Views: 39.2ms | ActiveRecord: 16.1ms | Allocations: 10084)
+
+
+Started GET "/visits" for ::1 at 2021-06-14 22:30:43 -0300
+Processing by VisitsController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mVisit Load (3.7ms)[0m  [1m[34mSELECT "visits".* FROM "visits"[0m
+  ↳ app/controllers/visits_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/visits_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/visits_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (131.89ms)
+Completed 200 OK in 863ms (Views: 676.2ms | ActiveRecord: 11.9ms | Allocations: 14337)
+
+
+Started GET "/visits/1" for ::1 at 2021-06-14 22:31:48 -0300
+Processing by VisitsController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.29ms)
+Completed 200 OK in 144ms (Views: 137.2ms | ActiveRecord: 0.7ms | Allocations: 2124)
+
+
+Started GET "/visits/1" for ::1 at 2021-06-14 22:32:42 -0300
+Processing by VisitsController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mVisit Load (1.2ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:11:in `show'
+[active_model_serializers]   [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/visits_controller.rb:12:in `show'
+[active_model_serializers] Rendered VisitSerializer with ActiveModelSerializers::Adapter::Attributes (18.53ms)
+Completed 200 OK in 131ms (Views: 26.9ms | ActiveRecord: 15.8ms | Allocations: 12080)
+
+
+Started POST "/visits" for ::1 at 2021-06-14 22:35:17 -0300
+Processing by VisitsController#create as */*
+  Parameters: {"date"=>"2021-06-15", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "user_id"=>"6", "visit"=>{"date"=>"2021-06-15", "user_id"=>"6", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+Completed 500 Internal Server Error in 63ms (ActiveRecord: 0.8ms | Allocations: 1815)
+
+
+  
+ArgumentError (comparison of Date with nil failed):
+  
+app/models/visit.rb:10:in `<'
+app/models/visit.rb:10:in `date_cannot_be_in_the_past'
+app/controllers/visits_controller.rb:19:in `create'
+Started POST "/visits" for ::1 at 2021-06-14 22:36:43 -0300
+Processing by VisitsController#create as */*
+  Parameters: {"date"=>"2021-06-15", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "created_at"=>"2021-06-14T22:36:00.000Z", "user_id"=>"6", "visit"=>{"date"=>"2021-06-15", "user_id"=>"6", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "created_at"=>"2021-06-14T22:36:00.000Z"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+[31mUnpermitted parameter: :created_at[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.5ms | Allocations: 1656)
+
+
+  
+ArgumentError (comparison of Date with nil failed):
+  
+app/models/visit.rb:10:in `<'
+app/models/visit.rb:10:in `date_cannot_be_in_the_past'
+app/controllers/visits_controller.rb:19:in `create'
+Started POST "/visits" for ::1 at 2021-06-14 22:37:10 -0300
+Processing by VisitsController#create as */*
+  Parameters: {"date"=>"2021-06-15", "created_at"=>"2021-06-14T22:36:00.000Z", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "user_id"=>"6", "visit"=>{"date"=>"2021-06-15", "user_id"=>"6", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "created_at"=>"2021-06-14T22:36:00.000Z"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+[31mUnpermitted parameter: :created_at[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.5ms | Allocations: 1653)
+
+
+  
+ArgumentError (comparison of Date with nil failed):
+  
+app/models/visit.rb:10:in `<'
+app/models/visit.rb:10:in `date_cannot_be_in_the_past'
+app/controllers/visits_controller.rb:19:in `create'
+Started POST "/visits" for ::1 at 2021-06-14 22:38:29 -0300
+Processing by VisitsController#create as */*
+  Parameters: {"created_at"=>"2021-06-14T22:36:00.000Z", "date"=>"2021-06-15", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "user_id"=>"6", "visit"=>{"date"=>"2021-06-15", "user_id"=>"6", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "created_at"=>"2021-06-14T22:36:00.000Z"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+[31mUnpermitted parameter: :created_at[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.6ms | Allocations: 1656)
+
+
+  
+ArgumentError (comparison of Date with nil failed):
+  
+app/models/visit.rb:10:in `<'
+app/models/visit.rb:10:in `date_cannot_be_in_the_past'
+app/controllers/visits_controller.rb:19:in `create'
+Started POST "/visits" for ::1 at 2021-06-14 22:39:47 -0300
+Processing by VisitsController#create as */*
+  Parameters: {"date"=>"2021-06-15", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "user_id"=>"6", "visit"=>{"date"=>"2021-06-15", "user_id"=>"6", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/models/visit.rb:22:in `verify_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with ActiveModel::Errors (0.14ms)
+Completed 422 Unprocessable Entity in 82ms (Views: 2.1ms | ActiveRecord: 14.8ms | Allocations: 9880)
+
+
+Started POST "/visits" for ::1 at 2021-06-14 22:40:15 -0300
+Processing by VisitsController#create as */*
+  Parameters: {"date"=>"2021-06-16", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z", "user_id"=>"6", "visit"=>{"date"=>"2021-06-16", "user_id"=>"6", "checkin_at"=>"2021-06-13T14:00:00.000Z", "checkout_at"=>"2021-06-13T16:00:00.000Z"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/models/visit.rb:22:in `verify_user'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+  [1m[36mVisit Create (1.9ms)[0m  [1m[32mINSERT INTO "visits" ("date", "user_id", "checkin_at", "checkout_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["date", "2021-06-16"], ["user_id", 6], ["checkin_at", "2021-06-13 14:00:00"], ["checkout_at", "2021-06-13 16:00:00"], ["created_at", "2021-06-15 01:40:16.040851"], ["updated_at", "2021-06-15 01:40:16.040851"]]
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/visits_controller.rb:19:in `create'
+[active_model_serializers] Rendered VisitSerializer with ActiveModelSerializers::Adapter::Attributes (11.86ms)
+Completed 201 Created in 62ms (Views: 22.1ms | ActiveRecord: 6.3ms | Allocations: 4842)
+
+
+Started PUT "/visits/1" for ::1 at 2021-06-14 22:41:55 -0300
+Processing by VisitsController#update as */*
+  Parameters: {"status"=>"2", "id"=>"1", "visit"=>{"status"=>"2"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mVisit Load (0.8ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:28:in `update'
+Completed 500 Internal Server Error in 95ms (ActiveRecord: 15.8ms | Allocations: 8608)
+
+
+  
+ArgumentError ('2' is not a valid status):
+  
+app/controllers/visits_controller.rb:30:in `update'
+Started PUT "/visits/1" for ::1 at 2021-06-14 22:42:10 -0300
+Processing by VisitsController#update as */*
+  Parameters: {"status"=>"1", "id"=>"1", "visit"=>{"status"=>"1"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mVisit Load (0.7ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:28:in `update'
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 1.3ms | Allocations: 1244)
+
+
+  
+ArgumentError ('1' is not a valid status):
+  
+app/controllers/visits_controller.rb:30:in `update'
+Started PUT "/visits/1" for ::1 at 2021-06-14 22:42:20 -0300
+Processing by VisitsController#update as */*
+  Parameters: {"status"=>"realizada", "id"=>"1", "visit"=>{"status"=>"realizada"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mVisit Load (0.9ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/visits_controller.rb:30:in `update'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:30:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/visit.rb:22:in `verify_user'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/visits_controller.rb:30:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with ActiveModel::Errors (0.12ms)
+Completed 422 Unprocessable Entity in 37ms (Views: 2.0ms | ActiveRecord: 3.0ms | Allocations: 4110)
+
+
+Started PUT "/visits/3" for ::1 at 2021-06-14 22:42:40 -0300
+Processing by VisitsController#update as */*
+  Parameters: {"status"=>"realizada", "id"=>"3", "visit"=>{"status"=>"realizada"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mVisit Load (1.2ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:28:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:30:in `update'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/models/visit.rb:22:in `verify_user'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/visits_controller.rb:30:in `update'
+  [1m[36mVisit Update (63.4ms)[0m  [1m[33mUPDATE "visits" SET "status" = $1, "updated_at" = $2 WHERE "visits"."id" = $3[0m  [["status", 2], ["updated_at", "2021-06-15 01:42:40.936475"], ["id", 3]]
+  ↳ app/controllers/visits_controller.rb:30:in `update'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/visits_controller.rb:30:in `update'
+[active_model_serializers] Rendered VisitSerializer with ActiveModelSerializers::Adapter::Attributes (13.67ms)
+Completed 200 OK in 268ms (Views: 142.6ms | ActiveRecord: 66.5ms | Allocations: 6266)
+
+
+Started DELETE "/visits/1" for ::1 at 2021-06-14 22:43:39 -0300
+Processing by VisitsController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mVisit Load (1.1ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/visits_controller.rb:39:in `destroy'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/visits_controller.rb:40:in `destroy'
+  [1m[36mVisit Destroy (0.8ms)[0m  [1m[31mDELETE FROM "visits" WHERE "visits"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/visits_controller.rb:40:in `destroy'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/visits_controller.rb:40:in `destroy'
+Completed 204 No Content in 116ms (ActiveRecord: 18.6ms | Allocations: 11104)
+
+
+  [1m[36mVisit Load (4.7ms)[0m  [1m[34mSELECT "visits".* FROM "visits" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
