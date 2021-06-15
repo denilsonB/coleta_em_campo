@@ -18,8 +18,7 @@ class Visit < ApplicationRecord
     end
   end
   def verify_user
-    user = User.find_by(id:user_id)
-    if !user.valid?
+    if !User.find_by(id:user_id).present?
       errors.add(:user, "Invalid User")
     end
   end
