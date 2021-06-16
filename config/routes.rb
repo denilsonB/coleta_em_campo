@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :questions
+  resources :formularies
   post 'authenticate', to: 'authentication#authenticate'#authenticate user
   
   

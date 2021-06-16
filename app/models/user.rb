@@ -4,8 +4,6 @@ class User < ApplicationRecord
     
     #validations
 
-    #name can't be blank
-    validates :name, presence: true 
     #email must be unique and valid
     validates :email, email: true ,uniqueness: true , presence: true
     #cpf must be unique and valid

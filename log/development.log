@@ -2953,3 +2953,286 @@ Completed 204 No Content in 116ms (ActiveRecord: 18.6ms | Allocations: 11104)
 
 
   [1m[36mVisit Load (4.7ms)[0m  [1m[34mSELECT "visits".* FROM "visits" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (12.5ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mVisit Load (5.1ms)[0m  [1m[34mSELECT "visits".* FROM "visits" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (19.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1394429370874196790)[0m
+  [1m[35m (3.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(1394429370874196790)[0m
+  [1m[35m (4.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (22.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mVisit Load (6.8ms)[0m  [1m[34mSELECT "visits".* FROM "visits" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mVisit Load (0.9ms)[0m  [1m[34mSELECT "visits".* FROM "visits" ORDER BY "visits"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mVisit Create (75.8ms)[0m  [1m[32mINSERT INTO "visits" ("date", "user_id", "checkin_at", "checkout_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["date", "2021-06-17"], ["user_id", 6], ["checkin_at", "2021-06-14 14:00:00"], ["checkout_at", "2021-06-14 16:00:00"], ["created_at", "2021-06-15 00:00:00"], ["updated_at", "2021-06-15 18:01:10.776286"]]
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35m (56.7ms)[0m  [1m[35mCREATE DATABASE "coleta_em_campo_development" ENCODING = 'unicode'[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE DATABASE "coleta_em_campo_test" ENCODING = 'unicode'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1394429370874196790)[0m
+  [1m[35m (4.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateFormularies (20210615183956)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (186.1ms)[0m  [1m[35mCREATE TABLE "formularies" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210615183956"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(1394429370874196790)[0m
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (3.4ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario 1"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (2.0ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario 1"], ["created_at", "2021-06-15 18:43:19.034867"], ["updated_at", "2021-06-15 18:43:19.034867"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario 1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario 1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario de exemplo"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.9ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario de exemplo"], ["created_at", "2021-06-15 19:16:46.954875"], ["updated_at", "2021-06-15 19:16:46.954875"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFormulary Load (10.8ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario de exemplo"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+Started GET "/formularies" for ::1 at 2021-06-15 16:44:29 -0300
+  [1m[35m (6.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by FormulariesController#index as */*
+  [1m[36mUser Load (7.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (4.0ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies"[0m
+  ↳ app/controllers/formularies_controller.rb:7:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (24.21ms)
+Completed 200 OK in 1032ms (Views: 479.2ms | ActiveRecord: 35.1ms | Allocations: 15585)
+
+
+Started GET "/formularies/1" for ::1 at 2021-06-15 16:46:13 -0300
+Processing by FormulariesController#show as */*
+  Parameters: {"id"=>"1"}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 156ms (Views: 153.2ms | ActiveRecord: 0.0ms | Allocations: 1883)
+
+
+Started GET "/formularies" for ::1 at 2021-06-15 16:46:24 -0300
+Processing by FormulariesController#index as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (1.3ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies"[0m
+  ↳ app/controllers/formularies_controller.rb:7:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.64ms)
+Completed 200 OK in 25ms (Views: 9.1ms | ActiveRecord: 2.0ms | Allocations: 1546)
+
+
+Started GET "/formularies/1" for ::1 at 2021-06-15 16:46:36 -0300
+Processing by FormulariesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.23ms)
+Completed 200 OK in 49ms (Views: 40.7ms | ActiveRecord: 0.4ms | Allocations: 989)
+
+
+Started GET "/formularies/1" for ::1 at 2021-06-15 16:47:08 -0300
+Processing by FormulariesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (0.5ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/formularies_controller.rb:12:in `show'
+[active_model_serializers] Rendered FormularySerializer with ActiveModelSerializers::Adapter::Attributes (0.82ms)
+Completed 200 OK in 137ms (Views: 10.0ms | ActiveRecord: 15.8ms | Allocations: 8293)
+
+
+Started POST "/formularies" for ::1 at 2021-06-15 16:49:36 -0300
+Processing by FormulariesController#create as */*
+  Parameters: {"name"=>"formulario do postman", "formulary"=>{"name"=>"formulario do postman"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+  [1m[36mFormulary Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "formulario do postman"], ["LIMIT", 1]]
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+  [1m[36mFormulary Create (1.4ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "formulario do postman"], ["created_at", "2021-06-15 19:49:36.526404"], ["updated_at", "2021-06-15 19:49:36.526404"]]
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (20.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+[active_model_serializers] Rendered FormularySerializer with ActiveModelSerializers::Adapter::Attributes (0.43ms)
+Completed 201 Created in 57ms (Views: 2.4ms | ActiveRecord: 24.0ms | Allocations: 3502)
+
+
+Started GET "/formularies" for ::1 at 2021-06-15 16:49:41 -0300
+Processing by FormulariesController#index as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (0.7ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies"[0m
+  ↳ app/controllers/formularies_controller.rb:7:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.74ms)
+Completed 200 OK in 17ms (Views: 8.1ms | ActiveRecord: 1.5ms | Allocations: 1633)
+
+
+Started PUT "/formularies/3" for ::1 at 2021-06-15 16:51:03 -0300
+Processing by FormulariesController#update as */*
+  Parameters: {"name"=>"Formulario editado pelo postman", "id"=>"3", "formulary"=>{"name"=>"Formulario editado pelo postman"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.4ms | Allocations: 1218)
+
+
+  
+NoMethodError (undefined method `update' for nil:NilClass):
+  
+app/controllers/formularies_controller.rb:29:in `update'
+Started PUT "/formularies/3" for ::1 at 2021-06-15 16:51:38 -0300
+Processing by FormulariesController#update as */*
+  Parameters: {"name"=>"Formulario editado pelo postman", "id"=>"3", "formulary"=>{"name"=>"Formulario editado pelo postman"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (1.0ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/formularies_controller.rb:29:in `update'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/formularies_controller.rb:30:in `update'
+  [1m[36mFormulary Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 AND "formularies"."id" != $2 LIMIT $3[0m  [["name", "Formulario editado pelo postman"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/formularies_controller.rb:30:in `update'
+  [1m[36mFormulary Update (39.1ms)[0m  [1m[33mUPDATE "formularies" SET "name" = $1, "updated_at" = $2 WHERE "formularies"."id" = $3[0m  [["name", "Formulario editado pelo postman"], ["updated_at", "2021-06-15 19:51:39.172667"], ["id", 3]]
+  ↳ app/controllers/formularies_controller.rb:30:in `update'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/formularies_controller.rb:30:in `update'
+[active_model_serializers] Rendered FormularySerializer with ActiveModelSerializers::Adapter::Attributes (0.81ms)
+Completed 200 OK in 176ms (Views: 13.6ms | ActiveRecord: 59.9ms | Allocations: 10002)
+
+
+Started GET "/formularies" for ::1 at 2021-06-15 16:51:42 -0300
+Processing by FormulariesController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (0.7ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies"[0m
+  ↳ app/controllers/formularies_controller.rb:7:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.68ms)
+Completed 200 OK in 20ms (Views: 10.9ms | ActiveRecord: 1.3ms | Allocations: 1632)
+
+
+Started DELETE "/formularies/3" for ::1 at 2021-06-15 16:52:45 -0300
+Processing by FormulariesController#destroy as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (0.8ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/formularies_controller.rb:39:in `destroy'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/formularies_controller.rb:40:in `destroy'
+  [1m[36mFormulary Destroy (11.9ms)[0m  [1m[31mDELETE FROM "formularies" WHERE "formularies"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/formularies_controller.rb:40:in `destroy'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/formularies_controller.rb:40:in `destroy'
+Completed 204 No Content in 133ms (ActiveRecord: 30.2ms | Allocations: 8988)
+
+
+Started GET "/formularies" for ::1 at 2021-06-15 16:52:51 -0300
+Processing by FormulariesController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (0.8ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies"[0m
+  ↳ app/controllers/formularies_controller.rb:7:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (1.65ms)
+Completed 200 OK in 38ms (Views: 29.0ms | ActiveRecord: 1.4ms | Allocations: 1876)
+
+
+Started POST "/formularies" for ::1 at 2021-06-15 16:53:03 -0300
+Processing by FormulariesController#create as */*
+  Parameters: {"name"=>"formulario 1", "formulary"=>{"name"=>"formulario 1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+  [1m[36mFormulary Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "formulario 1"], ["LIMIT", 1]]
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+  [1m[36mFormulary Create (0.9ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "formulario 1"], ["created_at", "2021-06-15 19:53:03.853111"], ["updated_at", "2021-06-15 19:53:03.853111"]]
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+[active_model_serializers] Rendered FormularySerializer with ActiveModelSerializers::Adapter::Attributes (0.33ms)
+Completed 201 Created in 34ms (Views: 2.1ms | ActiveRecord: 4.2ms | Allocations: 3264)
+
+
+Started GET "/formularies" for ::1 at 2021-06-15 16:53:08 -0300
+Processing by FormulariesController#index as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mFormulary Load (0.9ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies"[0m
+  ↳ app/controllers/formularies_controller.rb:7:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (1.11ms)
+Completed 200 OK in 20ms (Views: 8.5ms | ActiveRecord: 1.6ms | Allocations: 1631)
+
+
+Started POST "/formularies" for ::1 at 2021-06-15 16:53:17 -0300
+Processing by FormulariesController#create as */*
+  Parameters: {"name"=>"formulario 1", "formulary"=>{"name"=>"formulario 1"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+  [1m[36mFormulary Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "formulario 1"], ["LIMIT", 1]]
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/formularies_controller.rb:20:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with ActiveModel::Errors (81.53ms)
+Completed 422 Unprocessable Entity in 110ms (Views: 83.5ms | ActiveRecord: 3.0ms | Allocations: 5024)
+
+
+Started GET "/visits" for ::1 at 2021-06-15 17:04:17 -0300
+Processing by VisitsController#index as */*
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mVisit Load (5.9ms)[0m  [1m[34mSELECT "visits".* FROM "visits"[0m
+  ↳ app/controllers/visits_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/visits_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/visits_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/visits_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (213.72ms)
+Completed 200 OK in 826ms (Views: 536.0ms | ActiveRecord: 73.7ms | Allocations: 15820)
+
+
+  [1m[35m (17.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1394429370874196790)[0m
+  [1m[35m (8.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateActiveStorageTables (20210616000513)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (274.6ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (45.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (78.0ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (43.7ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (30.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (70.3ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (40.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210616000513"]]
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQuestions (20210616001443)
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (103.7ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "name" character varying, "formulary_id" bigint NOT NULL, "type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_411397518d"
+FOREIGN KEY ("formulary_id")
+  REFERENCES "formularies" ("id")
+)[0m
+  [1m[35m (29.0ms)[0m  [1m[35mCREATE INDEX "index_questions_on_formulary_id" ON "questions" ("formulary_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210616001443"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (4.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(1394429370874196790)[0m
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
