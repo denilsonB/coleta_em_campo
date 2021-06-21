@@ -1,0 +1,6 @@
+<h1> Upload for question <%= @question.name %> </h1>
+
+<%= form_with model: @question, url: question_file_uploads_path(@question), method: :post, local: true do |f| %>
+    <%= f.file_field :file %> </br>
+    <%= f.submit %>
+<% end %>
