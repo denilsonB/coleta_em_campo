@@ -4045,3 +4045,285 @@ Processing by AnswersController#index as */*
 Completed 200 OK in 45ms (Views: 34.7ms | ActiveRecord: 3.5ms | Allocations: 4486)
 
 
+Started GET "/users" for ::1 at 2021-06-22 11:59:16 -0300
+  
+ActiveRecord::ConnectionNotEstablished (could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (::1) and accepting
+	TCP/IP connections on port 5432?
+could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5432?
+):
+  
+activerecord (6.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:83:in `rescue in new_client'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:77:in `new_client'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:37:in `postgresql_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:882:in `public_send'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:882:in `new_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:926:in `checkout_new_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:905:in `try_to_checkout_new_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:866:in `acquire_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:588:in `checkout'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:428:in `connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:1128:in `retrieve_connection'
+activerecord (6.1.3.2) lib/active_record/connection_handling.rb:327:in `retrieve_connection'
+activerecord (6.1.3.2) lib/active_record/connection_handling.rb:283:in `connection'
+activerecord (6.1.3.2) lib/active_record/migration.rb:611:in `connection'
+activerecord (6.1.3.2) lib/active_record/migration.rb:606:in `build_watcher'
+activerecord (6.1.3.2) lib/active_record/migration.rb:588:in `block in call'
+activerecord (6.1.3.2) lib/active_record/migration.rb:587:in `synchronize'
+activerecord (6.1.3.2) lib/active_record/migration.rb:587:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.3.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:98:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.1.3.2) lib/rails/engine.rb:539:in `call'
+puma (5.3.2) lib/puma/configuration.rb:249:in `call'
+puma (5.3.2) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.3.2) lib/puma/thread_pool.rb:338:in `with_force_shutdown'
+puma (5.3.2) lib/puma/request.rb:76:in `handle_request'
+puma (5.3.2) lib/puma/server.rb:438:in `process_client'
+puma (5.3.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2021-06-22 11:59:22 -0300
+  
+ActiveRecord::ConnectionNotEstablished (could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (::1) and accepting
+	TCP/IP connections on port 5432?
+could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5432?
+):
+  
+activerecord (6.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:83:in `rescue in new_client'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:77:in `new_client'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:37:in `postgresql_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:882:in `public_send'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:882:in `new_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:926:in `checkout_new_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:905:in `try_to_checkout_new_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:866:in `acquire_connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:588:in `checkout'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:428:in `connection'
+activerecord (6.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:1128:in `retrieve_connection'
+activerecord (6.1.3.2) lib/active_record/connection_handling.rb:327:in `retrieve_connection'
+activerecord (6.1.3.2) lib/active_record/connection_handling.rb:283:in `connection'
+activerecord (6.1.3.2) lib/active_record/migration.rb:611:in `connection'
+activerecord (6.1.3.2) lib/active_record/migration.rb:606:in `build_watcher'
+activerecord (6.1.3.2) lib/active_record/migration.rb:588:in `block in call'
+activerecord (6.1.3.2) lib/active_record/migration.rb:587:in `synchronize'
+activerecord (6.1.3.2) lib/active_record/migration.rb:587:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.3.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:98:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.1.3.2) lib/rails/engine.rb:539:in `call'
+puma (5.3.2) lib/puma/configuration.rb:249:in `call'
+puma (5.3.2) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.3.2) lib/puma/thread_pool.rb:338:in `with_force_shutdown'
+puma (5.3.2) lib/puma/request.rb:76:in `handle_request'
+puma (5.3.2) lib/puma/server.rb:438:in `process_client'
+puma (5.3.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+  [1m[35m (1352.8ms)[0m  [1m[35mCREATE DATABASE "coleta_em_campo_development" ENCODING = 'unicode'[0m
+  [1m[35m (1692.1ms)[0m  [1m[35mCREATE DATABASE "coleta_em_campo_test" ENCODING = 'unicode'[0m
+  [1m[35m (216.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (33.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1394429370874196790)[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20210610222750)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (19.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "password_digest" character varying, "email" character varying, "cpf" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (39.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210610222750"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateVisits (20210614164548)
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.5ms)[0m  [1m[35mCREATE TABLE "visits" ("id" bigserial primary key, "date" date, "status" integer DEFAULT 0, "user_id" bigint NOT NULL, "checkin_at" timestamp, "checkout_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_09e5e7c20b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE INDEX "index_visits_on_user_id" ON "visits" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210614164548"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFormularies (20210615183956)
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.4ms)[0m  [1m[35mCREATE TABLE "formularies" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210615183956"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveStorageTables (20210616000513)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (22.8ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (15.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (13.5ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210616000513"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQuestions (20210616001443)
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (17.5ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "name" character varying, "formulary_id" bigint NOT NULL, "type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_411397518d"
+FOREIGN KEY ("formulary_id")
+  REFERENCES "formularies" ("id")
+)[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE INDEX "index_questions_on_formulary_id" ON "questions" ("formulary_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210616001443"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAnswers (20210618172059)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.9ms)[0m  [1m[35mCREATE TABLE "answers" ("id" bigserial primary key, "content" character varying, "formulary_id" bigint NOT NULL, "question_id" bigint NOT NULL, "visit_id" bigint NOT NULL, "answered_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_d5c0f1251c"
+FOREIGN KEY ("formulary_id")
+  REFERENCES "formularies" ("id")
+, CONSTRAINT "fk_rails_3d5ed4418f"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+, CONSTRAINT "fk_rails_f694c22205"
+FOREIGN KEY ("visit_id")
+  REFERENCES "visits" ("id")
+)[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE INDEX "index_answers_on_formulary_id" ON "answers" ("formulary_id")[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE INDEX "index_answers_on_question_id" ON "answers" ("question_id")[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE INDEX "index_answers_on_visit_id" ON "answers" ("visit_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210618172059"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (5.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-06-22 15:37:08.042282"], ["updated_at", "2021-06-22 15:37:08.042282"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(1394429370874196790)[0m
+  [1m[35m (20.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/" for ::1 at 2021-06-22 12:41:33 -0300
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering vendor/bundle/ruby/2.7.0/gems/railties-6.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered vendor/bundle/ruby/2.7.0/gems/railties-6.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 152.5ms | Allocations: 411)
+Completed 200 OK in 506ms (Views: 259.7ms | ActiveRecord: 0.0ms | Allocations: 3579)
+
+
+Started GET "/favicon.ico" for ::1 at 2021-06-22 12:41:36 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users" for ::1 at 2021-06-22 12:42:26 -0300
+Processing by UsersController#index as HTML
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (16.04ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 126ms (Views: 44.4ms | ActiveRecord: 0.0ms | Allocations: 1185)
+
+
+  [1m[36mUser Load (14.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "10507453450"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "10507453450"], ["LIMIT", 1]]
+  [1m[36mUser Create (103.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "admin"], ["password_digest", "$2a$12$fBeK3A2JhASdbC.L2gfv0O1SIGJS/Hl96KFrYSlBZGYvoOk0wJz0u"], ["email", "admin@mail.com"], ["cpf", "10507453450"], ["created_at", "2021-06-22 18:19:10.059316"], ["updated_at", "2021-06-22 18:19:10.059316"]]
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/authenticate" for ::1 at 2021-06-22 15:25:07 -0300
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"admin@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"admin@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (23.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@mail.com"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:18:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@mail.com"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:18:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.25ms)
+Completed 200 OK in 1700ms (Views: 3.2ms | ActiveRecord: 82.0ms | Allocations: 9654)
+
+
+Started GET "/users" for ::1 at 2021-06-22 15:25:52 -0300
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (2.46ms)
+Completed 200 OK in 580ms (Views: 566.1ms | ActiveRecord: 1.5ms | Allocations: 5556)
+
+
+  [1m[35m (23.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1394429370874196790)[0m
+  [1m[35m (29.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (42.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(1394429370874196790)[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/authenticate" for ::1 at 2021-06-24 09:38:36 -0300
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"admin@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"admin@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (39.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@mail.com"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:18:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@mail.com"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:18:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.15ms)
+Completed 200 OK in 1715ms (Views: 23.2ms | ActiveRecord: 211.2ms | Allocations: 10823)
+
+
+  [1m[36mUser Load (32.4ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mFormulary Load (77.5ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario 1"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (1.9ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario 1"], ["created_at", "2021-06-24 19:13:20.916534"], ["updated_at", "2021-06-24 19:13:20.916534"]]
+  [1m[36mTRANSACTION (29.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (4.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (4.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (3.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "46956296071"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Test User"], ["password_digest", "$2a$12$FHClola09iuFqwga7ngswucyDM83otrxxLWy61zDo2NizD4/OlH8q"], ["email", "testuser@mail.com"], ["cpf", "46956296071"], ["created_at", "2021-06-24 19:53:51.315592"], ["updated_at", "2021-06-24 19:53:51.315592"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mVisit Load (41.0ms)[0m  [1m[34mSELECT "visits".* FROM "visits" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mFormulary Load (0.7ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mQuestion Load (28.3ms)[0m  [1m[34mSELECT "questions".* FROM "questions" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mAnswer Load (15.8ms)[0m  [1m[34mSELECT "answers".* FROM "answers" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mAnswer Load (0.8ms)[0m  [1m[34mSELECT "answers".* FROM "answers" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT "questions".* FROM "questions" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mFormulary Load (0.7ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]

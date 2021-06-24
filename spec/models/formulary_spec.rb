@@ -9,7 +9,7 @@ RSpec.describe Formulary, type: :model do
   end
   
   it "is not valid with name already taken" do
-    formulary.name = "Formulario de exemplo"
+    formulary.name = "Formulary Test"
     expect(formulary).to_not be_valid
   end
 end

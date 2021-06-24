@@ -17,11 +17,11 @@ RSpec.describe "/formularies", type: :request do
   # Formulary. As you add validations to Formulary, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {"name" => "Formulario Valido"}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {"name" => nil}
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -29,7 +29,7 @@ RSpec.describe "/formularies", type: :request do
   # FormulariesController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
-    {}
+    { }
   }
 
   describe "GET /index" do

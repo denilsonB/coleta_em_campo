@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
     
-    user = User.new(name:"Test",email:"test@mail.com",password:"Test123456",cpf:"08993277451")    
+    user = User.new(name:"Test",email:"test@mail.com",password:"Test123456",cpf:"79288904026")    
 
     it "is valid with valid attributes" do
         expect(user).to be_valid
@@ -34,12 +34,12 @@ RSpec.describe User, :type => :model do
     end
 
     it "is not valid with email already taken" do
-        user.email = "example@mail.com"
+        user.email = "testuser@mail.com"
         expect(user).to_not be_valid
     end
 
     it "is not valid with cpf already taken" do
-        user.cpf = "10507453450"
+        user.cpf = "46956296071"
         expect(user).to_not be_valid
     end
 

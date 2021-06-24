@@ -1570,3 +1570,902 @@ FOREIGN KEY ("visit_id")
   [1m[36mQuestion Load (3.0ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
   [1m[36mVisit Load (3.2ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
   [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (591.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (65.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4165939565251692795)[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20210610222750)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (110.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "password_digest" character varying, "email" character varying, "cpf" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (49.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210610222750"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateVisits (20210614164548)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (131.1ms)[0m  [1m[35mCREATE TABLE "visits" ("id" bigserial primary key, "date" date, "status" integer DEFAULT 0, "user_id" bigint NOT NULL, "checkin_at" timestamp, "checkout_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_09e5e7c20b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (21.8ms)[0m  [1m[35mCREATE INDEX "index_visits_on_user_id" ON "visits" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210614164548"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFormularies (20210615183956)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (56.7ms)[0m  [1m[35mCREATE TABLE "formularies" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210615183956"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveStorageTables (20210616000513)
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (17.6ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (14.8ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (14.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210616000513"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQuestions (20210616001443)
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (17.1ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "name" character varying, "formulary_id" bigint NOT NULL, "type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_411397518d"
+FOREIGN KEY ("formulary_id")
+  REFERENCES "formularies" ("id")
+)[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE INDEX "index_questions_on_formulary_id" ON "questions" ("formulary_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210616001443"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAnswers (20210618172059)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE TABLE "answers" ("id" bigserial primary key, "content" character varying, "formulary_id" bigint NOT NULL, "question_id" bigint NOT NULL, "visit_id" bigint NOT NULL, "answered_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_d5c0f1251c"
+FOREIGN KEY ("formulary_id")
+  REFERENCES "formularies" ("id")
+, CONSTRAINT "fk_rails_3d5ed4418f"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+, CONSTRAINT "fk_rails_f694c22205"
+FOREIGN KEY ("visit_id")
+  REFERENCES "visits" ("id")
+)[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE INDEX "index_answers_on_formulary_id" ON "answers" ("formulary_id")[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE INDEX "index_answers_on_question_id" ON "answers" ("question_id")[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE INDEX "index_answers_on_visit_id" ON "answers" ("visit_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210618172059"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (12.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2021-06-23 16:33:42.705780"], ["updated_at", "2021-06-23 16:33:42.705780"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(4165939565251692795)[0m
+  [1m[35m (3.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (2.2ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Load (2.9ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Load (2.7ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Novo formulario"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario de exemplo"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (0.7ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Load (17.5ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "Questão 1"], ["formulary_id", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "RSpec Question"], ["formulary_id", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "example@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "example@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "10507453450"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "example@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "0899327745"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "example@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277461"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "example@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277452"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (93.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (7.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (15.6ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-23 16:38:30.339108"], ["updated_at", "2021-06-23 16:38:30.339108"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/formularies" for 127.0.0.1 at 2021-06-23 13:38:30 -0300
+Processing by FormulariesController#index as JSON
+  Parameters: {"formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (17.37ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 263ms (Views: 115.8ms | ActiveRecord: 0.0ms | Allocations: 971)
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (1.2ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-23 16:38:30.887411"], ["updated_at", "2021-06-23 16:38:30.887411"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/formularies/2" for 127.0.0.1 at 2021-06-23 13:38:30 -0300
+Processing by FormulariesController#show as JSON
+  Parameters: {"id"=>"2", "formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.23ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-23 13:38:30 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>"Formulario Valido"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-23 13:38:30 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>"Formulario Valido"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-23 13:38:30 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-23 13:38:30 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.8ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-23 16:38:30.964679"], ["updated_at", "2021-06-23 16:38:30.964679"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.9ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-23 16:38:30.975156"], ["updated_at", "2021-06-23 16:38:30.975156"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.7ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-23 16:38:30.987380"], ["updated_at", "2021-06-23 16:38:30.987380"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/formularies/5" for 127.0.0.1 at 2021-06-23 13:38:30 -0300
+Processing by FormulariesController#update as JSON
+  Parameters: {"formulary"=>{"name"=>nil}, "id"=>"5"}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.6ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-23 16:38:31.004174"], ["updated_at", "2021-06-23 16:38:31.004174"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started DELETE "/formularies/6" for 127.0.0.1 at 2021-06-23 13:38:31 -0300
+Processing by FormulariesController#destroy as JSON
+  Parameters: {"id"=>"6", "formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (4.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Novo formulario"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario de exemplo"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Novo formulario"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario de exemplo"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (4.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (3.6ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Novo formulario"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (1.1ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:17:02.187294"], ["updated_at", "2021-06-24 12:17:02.187294"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/formularies" for 127.0.0.1 at 2021-06-24 09:17:02 -0300
+Processing by FormulariesController#index as JSON
+  Parameters: {"formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.18ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 160ms (Views: 58.7ms | ActiveRecord: 0.0ms | Allocations: 971)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.5ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:17:03.209039"], ["updated_at", "2021-06-24 12:17:03.209039"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/formularies/8" for 127.0.0.1 at 2021-06-24 09:17:03 -0300
+Processing by FormulariesController#show as JSON
+  Parameters: {"id"=>"8", "formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 169)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-24 09:17:03 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>"Formulario Valido"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-24 09:17:03 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>"Formulario Valido"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.2ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-24 09:17:03 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-24 09:17:03 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.7ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:17:03.309880"], ["updated_at", "2021-06-24 12:17:03.309880"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.5ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:17:03.336044"], ["updated_at", "2021-06-24 12:17:03.336044"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.5ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:17:03.343202"], ["updated_at", "2021-06-24 12:17:03.343202"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/formularies/11" for 127.0.0.1 at 2021-06-24 09:17:03 -0300
+Processing by FormulariesController#update as JSON
+  Parameters: {"formulary"=>{"name"=>nil}, "id"=>"11"}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.5ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:17:03.356009"], ["updated_at", "2021-06-24 12:17:03.356009"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started DELETE "/formularies/12" for 127.0.0.1 at 2021-06-24 09:17:03 -0300
+Processing by FormulariesController#destroy as JSON
+  Parameters: {"id"=>"12", "formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (2.6ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (1.2ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:25:01.609790"], ["updated_at", "2021-06-24 12:25:01.609790"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/formularies" for 127.0.0.1 at 2021-06-24 09:25:01 -0300
+Processing by FormulariesController#index as JSON
+  Parameters: {"formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 19ms (Views: 6.9ms | ActiveRecord: 0.0ms | Allocations: 971)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.6ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:25:01.737068"], ["updated_at", "2021-06-24 12:25:01.737068"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/formularies/14" for 127.0.0.1 at 2021-06-24 09:25:01 -0300
+Processing by FormulariesController#show as JSON
+  Parameters: {"id"=>"14", "formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 169)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-24 09:25:01 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>"Formulario Valido"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-24 09:25:01 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>"Formulario Valido"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-24 09:25:01 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/formularies" for 127.0.0.1 at 2021-06-24 09:25:01 -0300
+Processing by FormulariesController#create as JSON
+  Parameters: {"formulary"=>{"name"=>nil}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.7ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:25:01.794861"], ["updated_at", "2021-06-24 12:25:01.794861"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.6ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:25:01.803236"], ["updated_at", "2021-06-24 12:25:01.803236"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.6ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:25:01.829082"], ["updated_at", "2021-06-24 12:25:01.829082"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/formularies/17" for 127.0.0.1 at 2021-06-24 09:25:01 -0300
+Processing by FormulariesController#update as JSON
+  Parameters: {"formulary"=>{"name"=>nil}, "id"=>"17"}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario Valido"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (0.5ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulario Valido"], ["created_at", "2021-06-24 12:25:01.841033"], ["updated_at", "2021-06-24 12:25:01.841033"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+Started DELETE "/formularies/18" for 127.0.0.1 at 2021-06-24 09:25:01 -0300
+Processing by FormulariesController#destroy as JSON
+  Parameters: {"id"=>"18", "formulary"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 164)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "formularies"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valid@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Valid Name"], ["password_digest", "$2a$04$ghT6QTc1pFn8L7nHImgUCOzoI4Ya8rgZggA2PaD7SFlHasgz2naI6"], ["email", "valid@mail.com"], ["cpf", "08993277451"], ["created_at", "2021-06-24 12:29:21.681059"], ["updated_at", "2021-06-24 12:29:21.681059"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valid@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Valid Name"], ["password_digest", "$2a$04$mWzACZza3.725GfBJ3RTTuG5X6CNQwgBtcoFK5EDIKlmgw7GKzrBa"], ["email", "valid@mail.com"], ["cpf", "08993277451"], ["created_at", "2021-06-24 12:33:19.870784"], ["updated_at", "2021-06-24 12:33:19.870784"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2021-06-24 09:33:19 -0300
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 18ms (Views: 7.1ms | ActiveRecord: 0.0ms | Allocations: 972)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (15.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valid@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mUser Create (21.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Valid Name"], ["password_digest", "$2a$04$Ho8ru7bwEyKH7exEa3xI4.Fy9nUaVD.NiRIBEyHT.BAyrCRXHitqa"], ["email", "valid@mail.com"], ["cpf", "08993277451"], ["created_at", "2021-06-24 12:39:19.793804"], ["updated_at", "2021-06-24 12:39:19.793804"]]
+  [1m[36mTRANSACTION (8.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2021-06-24 09:39:19 -0300
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.15ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 22ms (Views: 8.2ms | ActiveRecord: 0.0ms | Allocations: 972)
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valid@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Valid Name"], ["password_digest", "$2a$04$uUMKua6oDWeUytr0WWFyO.bj560eRbvb7e5amzpI6cfSesHY8j9eu"], ["email", "valid@mail.com"], ["cpf", "08993277451"], ["created_at", "2021-06-24 12:43:02.293609"], ["updated_at", "2021-06-24 12:43:02.293609"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2021-06-24 09:43:02 -0300
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 21ms (Views: 8.1ms | ActiveRecord: 0.0ms | Allocations: 972)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Novo formulario"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (4.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valid@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Valid Name"], ["password_digest", "$2a$04$WDaBtb6WtAeCFtnmRP05W.HTm8flRv9lIQQO/cx/i04IkhrGva86i"], ["email", "valid@mail.com"], ["cpf", "08993277451"], ["created_at", "2021-06-24 12:44:51.514977"], ["updated_at", "2021-06-24 12:44:51.514977"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2021-06-24 09:44:51 -0300
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 19ms (Views: 7.0ms | ActiveRecord: 0.0ms | Allocations: 972)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valid@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Valid Name"], ["password_digest", "$2a$04$MWzYPMRtestKQqecasLaSeD1sBeiHBvavvXWAM7CfJGUGWKE3/y4S"], ["email", "valid@mail.com"], ["cpf", "08993277451"], ["created_at", "2021-06-24 12:52:55.661950"], ["updated_at", "2021-06-24 12:52:55.661950"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2021-06-24 09:52:55 -0300
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 19ms (Views: 7.2ms | ActiveRecord: 0.0ms | Allocations: 972)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (37.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (4.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (10.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (25.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "valid@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277451"], ["LIMIT", 1]]
+  [1m[36mUser Create (18.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Valid Name"], ["password_digest", "$2a$04$6FFKKxsDcsfxdHOOqm.6IehdujM80mUi1oB.cmOoWI5p0uTFGFW0i"], ["email", "valid@mail.com"], ["cpf", "08993277451"], ["created_at", "2021-06-24 19:11:50.587586"], ["updated_at", "2021-06-24 19:11:50.587586"]]
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users" for 127.0.0.1 at 2021-06-24 16:11:50 -0300
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 145ms (Views: 53.7ms | ActiveRecord: 0.0ms | Allocations: 972)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (38.9ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Novo formulario"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulario 1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "46956296071"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "email", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Test User"], ["password_digest", "$2a$04$uswQGfKB00kExQNQGr8bI.80FkO2w.M2aEK2EAaF9wkWxUrorhSU6"], ["email", "testuser@mail.com"], ["cpf", "46956296071"], ["created_at", "2021-06-24 19:54:46.027561"], ["updated_at", "2021-06-24 19:54:46.027561"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (2.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "46956296071"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "0899327745"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277461"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277452"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mVisit Load (26.9ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."date" = $1 LIMIT $2[0m  [["date", "2021-06-17"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (13.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (4.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mVisit Load (3.2ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."date" = $1 LIMIT $2[0m  [["date", "2021-06-25"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mVisit Load (3.1ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."date" = $1 LIMIT $2[0m  [["date", "2021-06-25"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mVisit Load (3.9ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."date" = $1 LIMIT $2[0m  [["date", "2021-06-25"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mVisit Load (3.1ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."date" = $1 LIMIT $2[0m  [["date", "2021-06-25"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mVisit Load (3.1ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."date" = $1 LIMIT $2[0m  [["date", "2021-06-25"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mVisit Create (3.1ms)[0m  [1m[32mINSERT INTO "visits" ("date", "user_id", "checkin_at", "checkout_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["date", "2021-06-25"], ["user_id", 8], ["checkin_at", "2021-06-14 14:00:00"], ["checkout_at", "2021-06-14 16:00:00"], ["created_at", "2021-06-24 00:00:00"], ["updated_at", "2021-06-24 20:17:30.968352"]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFormulary Load (2.8ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulary Test"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulary Test"], ["LIMIT", 1]]
+  [1m[36mFormulary Create (1.1ms)[0m  [1m[32mINSERT INTO "formularies" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Formulary Test"], ["created_at", "2021-06-24 20:17:31.048155"], ["updated_at", "2021-06-24 20:17:31.048155"]]
+  [1m[36mTRANSACTION (17.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mQuestion Load (46.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."name" = $1 LIMIT $2[0m  [["name", "Question 1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (0.4ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Load (1.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "Question 1"], ["formulary_id", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mAnswer Load (50.8ms)[0m  [1m[34mSELECT "answers".* FROM "answers" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mVisit Load (5.0ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."date" = $1 LIMIT $2[0m  [["date", "2021-06-25"], ["LIMIT", 1]]
+  [1m[36mFormulary Load (3.2ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulary Test"], ["LIMIT", 1]]
+  [1m[36mQuestion Load (3.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."name" = $1 LIMIT $2[0m  [["name", "Question 1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (0.5ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Load (1.7ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "Question 1"], ["formulary_id", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mAnswer Load (4.5ms)[0m  [1m[34mSELECT "answers".* FROM "answers" WHERE "answers"."content" = $1 LIMIT $2[0m  [["content", "Test Answer"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (0.4ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Load (0.5ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "79288904026"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "46956296071"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "0899327745"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277461"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "testuser@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."cpf" = $1 LIMIT $2[0m  [["cpf", "08993277452"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (4.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (9.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mFormulary Load (3.3ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (3.1ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Novo formulario"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "formularies" WHERE "formularies"."name" = $1 LIMIT $2[0m  [["name", "Formulary Test"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mQuestion Load (2.9ms)[0m  [1m[34mSELECT "questions".* FROM "questions" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mAnswer Load (0.9ms)[0m  [1m[34mSELECT "answers".* FROM "answers" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (1.0ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[36mQuestion Load (0.9ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "Question 1"], ["formulary_id", 19]]
+  [1m[36mQuestion Create (2.5ms)[0m  [1m[32mINSERT INTO "questions" ("name", "formulary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Question 1"], ["formulary_id", 19], ["created_at", "2021-06-24 20:23:50.623898"], ["updated_at", "2021-06-24 20:23:50.623898"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (3.2ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Load (4.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "RSpec Question"], ["formulary_id", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "Question 1"], ["formulary_id", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (2.3ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[36mQuestion Load (3.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "RSpec Question"], ["formulary_id", 19]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (1.0ms)[0m  [1m[34mSELECT "questions".* FROM "questions" INNER JOIN "formularies" ON "formularies"."id" = "questions"."formulary_id" WHERE "questions"."name" = $1 AND "questions"."formulary_id" = $2[0m  [["name", "Question 1"], ["formulary_id", 19]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mVisit Load (3.1ms)[0m  [1m[34mSELECT "visits".* FROM "visits" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (3.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFormulary Load (2.8ms)[0m  [1m[34mSELECT "formularies".* FROM "formularies" WHERE "formularies"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[36mQuestion Load (3.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mVisit Load (3.9ms)[0m  [1m[34mSELECT "visits".* FROM "visits" WHERE "visits"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
